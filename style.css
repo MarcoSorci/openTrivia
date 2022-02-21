@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre&display=swap');
+
+html{
+    font-family: 'Frank Ruhl Libre', serif;
+}
+
+.question-text{
+    color: royalblue; 
+}
+
+ul{
+    padding: 10px;
+}
+
+.button-elem{
+    padding: 5px;
+    margin: 10px;
+}
