@@ -6,6 +6,7 @@ function loadTrivia() {
 }
 
 function createTrivias(data) {
+
     const results = data.results;
     const triviaArray = []
     for (const res of results) {
@@ -36,8 +37,6 @@ function displayTrivia(triviaArray) {
     // const title2 = document.querySelector('.main-title')  //only takes the first one though
     // const body2 = document.querySelector('body')
 }
-
-//div for each question con .style, answers must be buttons stile con una .classname
 
 function createTriviaListElement(trivia) {
     let liElement = document.createElement('div')
