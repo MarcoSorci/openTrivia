@@ -20,6 +20,16 @@ class Trivia {
         return shuffledArray
     }
 
+
+    checkAnswer(answ){
+        console.log(answ);
+        if (answ === this.correctAnswer) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
 }
 
 

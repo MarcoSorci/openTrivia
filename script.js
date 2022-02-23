@@ -50,27 +50,32 @@ function createTriviaListElement(trivia) {
     span.appendChild(textnode)
     liElement.appendChild(span)
 
-    let answersList = createAnswersList(trivia.getAllAnswers())
+    let answersList = createAnswersList(trivia.getAllAnswers(), trivia)
     liElement.appendChild(answersList)
 
     return liElement
 }
 
-function createAnswersList(answers) {
+function createAnswersList(answers, trivia) {
     let answerList= document.createElement('ul')
     for (const answ of answers) {
-        let liElement = createAnswerListElement(answ)
+        let liElement = createAnswerListElement(answ, trivia)
         answerList.appendChild(liElement)
     }
     return answerList
 }
 
-function createAnswerListElement(answ) {
+function createAnswerListElement(answ, trivia) {
     let liElement = document.createElement('button')
     liElement.className += 'button-elem'
-    liElement.setAttribute("onclick", "checkResult()")
+    // if (answ === carry.correctAnswer) {
+    //     liElement.id = 'black'
+    // } else {
+    //     liElement.backgroundColor = 'black'
+    // }
     let span = document.createElement('span')
     let textnode = document.createTextNode(decodeHtml(answ))
+    liElement.addEventListener('click', (event) => onButtonClick(event, trivia));
 
     span.appendChild(textnode)
     liElement.appendChild(span)
@@ -78,18 +83,19 @@ function createAnswerListElement(answ) {
     return liElement
 }
 
-function checkResult() {
-    if (this === this.correct_answer) {
-        changeColor(this, "red")
-    }
+function onButtonClick(event, trivia) {
+    const response = event.target.innerText;
+    const points = trivia.checkAnswer(response);
+    console.log(points);
 }
 
-function changeColor(elem, color) {
-    elem.style.color = color;
-}
+// const singleButton = document.getElementById('button-elem')
+// singleButton.addEventListener('click', checkAnswer())
 
 function decodeHtml(html) {                           
     let txt = document.createElement("textarea");
     txt.innerHTML = html;
     return txt.value;
 }
+
+
