@@ -43,7 +43,6 @@ function createTriviaListElement(trivia) {
     let span = document.createElement('span')
     span.className += 'question-text' //best to += so you can add multiple
     span.style.fontWeight = 'bold'
-    span.style.backgroundColor = 'lightgrey'
     let textnode = document.createTextNode(Utility.decodeHtml(trivia.question))
 
 
@@ -79,6 +78,8 @@ function createAnswerListElement(answ, trivia, answerList) {
 }
 
 let finalPoints = 0
+let counter = document.getElementById('counter')
+    
 
 function onButtonClick(event, trivia, liElement, answerList) {
     const response = event.target.innerText;
@@ -93,11 +94,14 @@ function onButtonClick(event, trivia, liElement, answerList) {
         } else {
             button.style.backgroundColor = 'red'
         }
+
+       button.outerHTML = button.outerHTML  //loses event listeners by recreating the tag
     }
 
-    console.log(finalPoints);
-}
+    let countertext = document.createTextNode(finalPoints)
+    counter.appendChild(countertext)
 
+}
 
 
 

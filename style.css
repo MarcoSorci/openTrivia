@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
 
 html{
-    font-family: 'Frank Ruhl Libre', serif;
+    font-family: 'Roboto Mono', monospace;
+    text-align: center;
+    background-color: #cbafff7e;
 }
 
 .question-text{
@@ -15,4 +17,6 @@ ul{
 .button-elem{
     padding: 5px;
     margin: 10px;
+    border-radius: 5px;
+    border-color: #a882ee;
 }

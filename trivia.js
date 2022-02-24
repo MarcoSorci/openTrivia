@@ -22,7 +22,6 @@ class Trivia {
 
 
     checkAnswer(answ){
-        console.log(answ);
         if (answ === (Utility.decodeHtml(this.correctAnswer))) {
             return 1;
         } else {
