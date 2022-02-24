@@ -23,7 +23,7 @@ class Trivia {
 
     checkAnswer(answ){
         console.log(answ);
-        if (answ === this.correctAnswer) {
+        if (answ === (Utility.decodeHtml(this.correctAnswer))) {
             return 1;
         } else {
             return 0;

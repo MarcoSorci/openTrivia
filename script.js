@@ -44,8 +44,8 @@ function createTriviaListElement(trivia) {
     span.className += 'question-text' //best to += so you can add multiple
     span.style.fontWeight = 'bold'
     span.style.backgroundColor = 'lightgrey'
-    let textnode = document.createTextNode(decodeHtml(trivia.question))
-    
+    let textnode = document.createTextNode(Utility.decodeHtml(trivia.question))
+
 
     span.appendChild(textnode)
     liElement.appendChild(span)
@@ -57,25 +57,20 @@ function createTriviaListElement(trivia) {
 }
 
 function createAnswersList(answers, trivia) {
-    let answerList= document.createElement('ul')
+    let answerList = document.createElement('ul')
     for (const answ of answers) {
-        let liElement = createAnswerListElement(answ, trivia)
+        let liElement = createAnswerListElement(answ, trivia, answerList)
         answerList.appendChild(liElement)
     }
     return answerList
 }
 
-function createAnswerListElement(answ, trivia) {
+function createAnswerListElement(answ, trivia, answerList) {
     let liElement = document.createElement('button')
     liElement.className += 'button-elem'
-    // if (answ === carry.correctAnswer) {
-    //     liElement.id = 'black'
-    // } else {
-    //     liElement.backgroundColor = 'black'
-    // }
     let span = document.createElement('span')
-    let textnode = document.createTextNode(decodeHtml(answ))
-    liElement.addEventListener('click', (event) => onButtonClick(event, trivia));
+    let textnode = document.createTextNode(Utility.decodeHtml(answ))
+    liElement.addEventListener('click', (event) => onButtonClick(event, trivia, liElement, answerList), { once: true });
 
     span.appendChild(textnode)
     liElement.appendChild(span)
@@ -83,19 +78,26 @@ function createAnswerListElement(answ, trivia) {
     return liElement
 }
 
-function onButtonClick(event, trivia) {
+let finalPoints = 0
+
+function onButtonClick(event, trivia, liElement, answerList) {
     const response = event.target.innerText;
-    const points = trivia.checkAnswer(response);
-    console.log(points);
+    if (trivia.checkAnswer(Utility.decodeHtml(response))) {
+        finalPoints++
+    }
+    
+    for (const button of answerList.getElementsByTagName('button')) {
+        let response = button.innerText
+        if (trivia.checkAnswer(Utility.decodeHtml(response))) {
+            button.style.backgroundColor = 'lightgreen'
+        } else {
+            button.style.backgroundColor = 'red'
+        }
+    }
+
+    console.log(finalPoints);
 }
 
-// const singleButton = document.getElementById('button-elem')
-// singleButton.addEventListener('click', checkAnswer())
 
-function decodeHtml(html) {                           
-    let txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
-}
 
 
