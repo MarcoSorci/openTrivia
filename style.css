@@ -6,6 +6,12 @@ html{
     background-color: #cbafff7e;
 }
 
+h1{
+    font-style: italic;
+    font-size: 300%; 
+    text-shadow: 2px 2px #a882ee;
+}
+
 .question-text{
     color: royalblue; 
 }
@@ -19,4 +25,67 @@ ul{
     margin: 10px;
     border-radius: 5px;
     border-color: #a882ee;
+}
+
+#counter{
+    position: flex;
+    border: 1px solid #a882ee;
+    border-radius: 50px;
+    border-left: outset;
+    border-right: inset;
+    margin-left: 500px;
+    margin-right: 500px;
+    min-width: 200px;
+    font-size: 30px;
+    text-align: center;
+}
+
+#reset-button{
+    margin-left: 120px;
+    position: absolute;
+    font-size: 20px;
+    margin-top: 5px;
+    width: 120px;
+    height: 70px;
+    border-radius: 5px;
+    border-color: #a882ee;
+}
+
+#reset-button p{
+    text-shadow: 2px 2px #a882ee;
+}
+
+#refresh-button{
+    margin-left: -250px;
+    position: absolute;
+    font-size: 20px;
+    margin-top: 5px;
+    width: 120px;
+    height: 70px;
+    border-radius: 5px;
+    border-color: #a882ee;
+}
+
+#refresh-button p{
+    text-shadow: 2px 2px #a882ee;
+}
+
+
+
+
+@media screen and (min-width:768px) and (max-width: 1540px) {
+    #counter{
+        position: block;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    #counter{
+        margin-left: 10px;
+        margin-right: 10px;
+        min-width: 500px;
+    }
 }

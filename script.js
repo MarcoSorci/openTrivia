@@ -22,9 +22,9 @@ function createTrivias(data) {
     // console.log(triviaArray);
 }
 
-
+const list = document.getElementById('trivia-list')
 function displayTrivia(triviaArray) {
-    const list = document.getElementById('trivia-list')
+    
 
     for (const trivia of triviaArray) {
         let liElement = createTriviaListElement(trivia)
@@ -82,6 +82,7 @@ let counter = document.getElementById('counter')
     
 
 function onButtonClick(event, trivia, liElement, answerList) {
+    counter.innerHTML = 'Points: <br>'
     const response = event.target.innerText;
     if (trivia.checkAnswer(Utility.decodeHtml(response))) {
         finalPoints++
@@ -101,6 +102,11 @@ function onButtonClick(event, trivia, liElement, answerList) {
     let countertext = document.createTextNode(finalPoints)
     counter.appendChild(countertext)
 
+}
+
+function newQuestions() {
+    list.innerHTML = ''
+    loadTrivia()
 }
 
 

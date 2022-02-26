@@ -10,8 +10,16 @@
 </head>
 
 <body>
-    <h1 style="font-style: italic; font-size: 300%;">It's Trivia Time!</h1>
-    <p id="counter"></p>
+    <h1>It's Trivia Time!</h1>
+    <button id="refresh-button" onclick="newQuestions()">
+        <p>NEW Qs</p>
+    </button>
+    <button id="reset-button" onClick="window.location.reload();">
+        <p>RESET</p>
+    </button>
+    <div id="counter">
+        Points: <br> 0
+    </div>
     <ol id="trivia-list">
     </ol>
 </body>
