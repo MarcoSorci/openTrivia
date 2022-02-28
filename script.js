@@ -1,8 +1,62 @@
+function loadCategories() {
+    fetch('https://opentdb.com/api_category.php')
+        .then(resp => resp.json())
+        .then((data) => createSelect(data.trivia_categories, 'categories-select')) //if you need more parameters other than data you need a lambda
+        .catch(err => console.log(err));
+}
+
+function loadDifficulty() {
+    fetch('./assets/settingz/difficulty.json')
+        .then(resp => resp.json())
+        .then((data) => createSelect(data, 'difficulty-select'))
+        .catch(err => console.log(err));
+}
+
+function loadType() {
+    fetch('./assets/settingz/type.json')
+        .then(resp => resp.json())
+        .then((data) => createSelect(data, 'type-select'))
+        .catch(err => console.log(err));
+}
+
+function initQuiz() {
+    loadCategories()
+    loadDifficulty()
+    loadType()
+}
+
+function createSelect(data, selectId) {
+    const select = document.getElementById(selectId);
+    for (const elem of data) {
+        const option = document.createElement('option');
+        option.value = elem.id
+        const textnode = document.createTextNode(elem.name);
+        option.appendChild(textnode);
+        select.appendChild(option)
+    }
+}
+
+
 function loadTrivia() {
-    fetch('https://opentdb.com/api.php?amount=10')
+    let category = document.getElementById('categories-select').value;
+    let difficulty = document.getElementById('difficulty-select').value;
+    let type = document.getElementById('type-select').value;
+    let stringUrl = 'https://opentdb.com/api.php?amount=10';
+    if (category != -1) {
+        stringUrl += ("&category=" + category)
+    }
+    if (difficulty != -1) {
+        stringUrl += ("&difficulty=" + difficulty)
+    }
+    if (type != -1) {
+        stringUrl += ("&type=" + type)
+    }
+
+    fetch(stringUrl)
         .then(resp => resp.json())
         .then(createTrivias)
         .catch(err => console.log(err));
+
 }
 
 function createTrivias(data) {
@@ -24,7 +78,9 @@ function createTrivias(data) {
 
 const list = document.getElementById('trivia-list')
 function displayTrivia(triviaArray) {
-    
+
+    list.innerHTML = ''
+
 
     for (const trivia of triviaArray) {
         let liElement = createTriviaListElement(trivia)
@@ -79,7 +135,7 @@ function createAnswerListElement(answ, trivia, answerList) {
 
 let finalPoints = 0
 let counter = document.getElementById('counter')
-    
+
 
 function onButtonClick(event, trivia, liElement, answerList) {
     counter.innerHTML = 'Points: <br>'
@@ -87,7 +143,7 @@ function onButtonClick(event, trivia, liElement, answerList) {
     if (trivia.checkAnswer(Utility.decodeHtml(response))) {
         finalPoints++
     }
-    
+
     for (const button of answerList.getElementsByTagName('button')) {
         let response = button.innerText
         if (trivia.checkAnswer(Utility.decodeHtml(response))) {
@@ -96,17 +152,12 @@ function onButtonClick(event, trivia, liElement, answerList) {
             button.style.backgroundColor = 'red'
         }
 
-       button.outerHTML = button.outerHTML  //loses event listeners by recreating the tag
+        button.outerHTML = button.outerHTML  //loses event listeners by recreating the tag
     }
 
     let countertext = document.createTextNode(finalPoints)
     counter.appendChild(countertext)
 
-}
-
-function newQuestions() {
-    list.innerHTML = ''
-    loadTrivia()
 }
 
 

@@ -11,7 +11,20 @@
 
 <body>
     <h1>It's Trivia Time!</h1>
-    <button id="refresh-button" onclick="newQuestions()">
+
+    <div>
+        <select id="categories-select">
+            <option value="-1">All</option>
+        </select>
+        <select id="difficulty-select">
+            <option value="-1">All</option>
+        </select>
+        <select id="type-select">
+            <option value="-1">All</option>
+        </select>
+    </div>
+
+    <button id="refresh-button" onclick="loadTrivia()">
         <p>NEW Qs</p>
     </button>
     <button id="reset-button" onClick="window.location.reload();">
@@ -27,7 +40,7 @@
 <script src="trivia.js"></script>
 <script src="script.js"></script>
 <script>
-    loadTrivia()
+    initQuiz()
 </script>
 
 </html>
